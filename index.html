@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic page settings -->
+    <meta charset="UTF-8">
+
+    <!-- Mobile responsive -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- Page title -->
+    <title>Ask The Crowd</title>
+
+
+    <!-- =====================================
+         GOOGLE FONT
+    ====================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================
+         CSS
+    ====================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         MAIN CONTAINER
+    ====================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================
+             HEADER
+        ================================== -->
+
+        <h1>Ask The Crowd</h1>
+
+        <p>
+            Ask something.
+            Let the internet think.
+        </p>
+
+
+        <!-- =================================
+             QUESTION INPUT
+        ================================== -->
+
+        <div class="question-box">
+
+            <input
+                type="text"
+                id="questionInput"
+                placeholder="Should I learn Java before DSA?"
+                maxlength="200"
+            >
+
+            <button id="askButton">
+                Ask
+            </button>
+
+        </div>
+
+
+        <!-- =================================
+             QUESTION SECTION
+        ================================== -->
+
+        <section
+            id="questionSection"
+            class="hidden"
+        >
+
+
+            <!-- =============================
+                 QUESTION
+            ============================== -->
+
+            <h2 id="questionText">
+                Question goes here
+            </h2>
+
+
+            <!-- =============================
+                 VOTING
+            ============================== -->
+
+            <div class="buttons">
+
+                <button id="yesButton">
+                    YES
+                </button>
+
+                <button id="noButton">
+                    NO
+                </button>
+
+            </div>
+
+
+            <!-- =============================
+                 CROWD RESULT
+            ============================== -->
+
+            <div class="crowd-result">
+
+
+                <!-- Result header -->
+
+                <div class="result-top">
+
+                    <span>
+                        THE CROWD THINKS
+                    </span>
+
+                    <span>
+
+                        <b id="totalVotes">
+                            0
+                        </b>
+
+                        votes
+
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     YES BAR
+                ========================== -->
+
+                <div class="vote-row">
+
+                    <div class="vote-info">
+
+                        <span>
+                            YES
+                        </span>
+
+                        <strong id="yesPercent">
+                            0%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="vote-track">
+
+                        <div
+                            id="yesBar"
+                            class="vote-fill yes-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     NO BAR
+                ========================== -->
+
+                <div class="vote-row">
+
+                    <div class="vote-info">
+
+                        <span>
+                            NO
+                        </span>
+
+                        <strong id="noPercent">
+                            0%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="vote-track">
+
+                        <div
+                            id="noBar"
+                            class="vote-fill no-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 EXPLANATIONS
+            ================================== -->
+
+            <div class="explanation-section">
+
+                <h3>
+                    Why?
+                </h3>
+
+
+                <textarea
+                    id="explanationInput"
+                    placeholder="What's your reasoning?"
+                    maxlength="500"
+                ></textarea>
+
+
+                <button id="explanationButton">
+                    Share your take
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 PEOPLE'S OPINIONS
+            ================================== -->
+
+            <div class="opinions-section">
+
+                <h3>
+                    What people are saying
+                </h3>
+
+
+                <div id="explanationList">
+
+                    <!-- Firebase explanations
+                         will appear here -->
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================
+             FOOTER
+        ================================== -->
+
+        <footer>
+
+            <p>
+                Built with curiosity • powered by the crowd
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <!-- Firebase -->
+    <script
+        type="module"
+        src="firebase.js"
+    ></script>
+
+
+    <!-- Main JavaScript -->
+    <script
+        type="module"
+        src="script.js"
+    ></script>
+
+
+</body>
+
+</html>
