@@ -1,7 +1,7 @@
 
 // ============================================
 // ASK THE CROWD
-// MAIN JAVASCRIPT
+// V1.1
 // ============================================
 
 
@@ -19,7 +19,6 @@ import {
     getDocs,
     query,
     orderBy,
-    limit,
     doc,
     getDoc,
     updateDoc,
@@ -33,7 +32,7 @@ from
 
 
 // ============================================
-// GET HTML ELEMENTS
+// HTML ELEMENTS
 // ============================================
 
 const questionInput =
@@ -42,6 +41,18 @@ const questionInput =
 
 const askButton =
     document.getElementById("askButton");
+
+
+const questionsList =
+    document.getElementById("questionsList");
+
+
+const questionCount =
+    document.getElementById("questionCount");
+
+
+const questionsSection =
+    document.querySelector(".questions-section");
 
 
 const questionSection =
@@ -72,6 +83,14 @@ const totalVotes =
     document.getElementById("totalVotes");
 
 
+const yesBar =
+    document.getElementById("yesBar");
+
+
+const noBar =
+    document.getElementById("noBar");
+
+
 const explanationInput =
     document.getElementById("explanationInput");
 
@@ -84,12 +103,8 @@ const explanationList =
     document.getElementById("explanationList");
 
 
-const yesBar =
-    document.getElementById("yesBar");
-
-
-const noBar =
-    document.getElementById("noBar");
+const backButton =
+    document.getElementById("backButton");
 
 
 
@@ -124,7 +139,9 @@ async function createQuestion() {
 
     if (question === "") {
 
-        alert("Write a question first!");
+        alert(
+            "Write a question first!"
+        );
 
         return;
     }
@@ -139,81 +156,36 @@ async function createQuestion() {
             );
 
 
-        const newQuestion =
-            await addDoc(
-                questionsRef,
-                {
+        await addDoc(
+            questionsRef,
+            {
 
-                    text: question,
+                text: question,
 
-                    yesVotes: 0,
+                yesVotes: 0,
 
-                    noVotes: 0,
+                noVotes: 0,
 
-                    createdAt:
-                        serverTimestamp()
+                createdAt:
+                    serverTimestamp()
 
-                }
-            );
-
-
-        // Save new question ID
-        currentQuestionId =
-            newQuestion.id;
-
-
-        // ====================================
-        // CLEAR OLD VOTE
-        // ====================================
-
-        localStorage.removeItem(
-            "vote_" + currentQuestionId
-        );
-
-
-        // Reset buttons
-        resetVoteButtons();
-
-
-        // Show question
-        questionText.textContent =
-            question;
-
-
-        questionSection.classList.remove(
-            "hidden"
+            }
         );
 
 
         // Clear input
+
         questionInput.value = "";
 
 
-        // Reset results
-        yesPercent.textContent = "0%";
+        // Reload all questions
 
-        noPercent.textContent = "0%";
-
-        totalVotes.textContent = "0";
-
-
-        yesBar.style.width = "0%";
-
-        noBar.style.width = "0%";
-
-
-        // Clear explanations
-        explanationList.innerHTML = "";
-
+        loadQuestions();
 
     }
     catch (error) {
 
-        console.error(
-            "Create question error:",
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Could not create question."
@@ -221,6 +193,317 @@ async function createQuestion() {
 
     }
 }
+
+
+
+// ============================================
+// LOAD ALL QUESTIONS
+// ============================================
+
+async function loadQuestions() {
+
+    try {
+
+        const questionsRef =
+            collection(
+                db,
+                "questions"
+            );
+
+
+        const questionsQuery =
+            query(
+
+                questionsRef,
+
+                orderBy(
+                    "createdAt",
+                    "desc"
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(
+                questionsQuery
+            );
+
+
+        // Clear list
+
+        questionsList.innerHTML = "";
+
+
+        // Show count
+
+        questionCount.textContent =
+            snapshot.size;
+
+
+        // No questions
+
+        if (snapshot.empty) {
+
+            questionsList.innerHTML =
+                `
+                <div class="empty-state">
+                    No questions yet.
+                    Be the first one.
+                </div>
+                `;
+
+            return;
+        }
+
+
+        // ====================================
+        // CREATE QUESTION CARDS
+        // ====================================
+
+        snapshot.forEach(
+            (questionDoc) => {
+
+                const data =
+                    questionDoc.data();
+
+
+                const yes =
+                    data.yesVotes || 0;
+
+
+                const no =
+                    data.noVotes || 0;
+
+
+                const total =
+                    yes + no;
+
+
+                let yesPercentage = 0;
+
+                let noPercentage = 0;
+
+
+                if (total > 0) {
+
+                    yesPercentage =
+                        Math.round(
+                            (yes / total) * 100
+                        );
+
+
+                    noPercentage =
+                        100 - yesPercentage;
+
+                }
+
+
+                // Create card
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "question-card";
+
+
+                card.innerHTML = `
+
+                    <div class="card-question">
+                        ${escapeHTML(data.text)}
+                    </div>
+
+                    <div class="card-result">
+
+                        <span>
+                            YES ${yesPercentage}%
+                        </span>
+
+                        <span>
+                            ${total} votes
+                        </span>
+
+                    </div>
+
+                    <div class="mini-bar">
+
+                        <div
+                            class="mini-bar-fill"
+                            style="width: ${yesPercentage}%"
+                        ></div>
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        <span>
+                            NO ${noPercentage}%
+                        </span>
+
+                        <span>
+                            View →
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                // Click card
+
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        openQuestion(
+                            questionDoc.id
+                        );
+
+                    }
+                );
+
+
+                questionsList.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+    }
+}
+
+
+
+// ============================================
+// OPEN QUESTION
+// ============================================
+
+async function openQuestion(questionId) {
+
+    try {
+
+        const questionRef =
+            doc(
+                db,
+                "questions",
+                questionId
+            );
+
+
+        const snapshot =
+            await getDoc(
+                questionRef
+            );
+
+
+        if (!snapshot.exists()) {
+
+            return;
+        }
+
+
+        const data =
+            snapshot.data();
+
+
+        // Save ID
+
+        currentQuestionId =
+            questionId;
+
+
+        // Show question
+
+        questionText.textContent =
+            data.text;
+
+
+        // Switch sections
+
+        questionsSection.classList.add(
+            "hidden"
+        );
+
+
+        questionSection.classList.remove(
+            "hidden"
+        );
+
+
+        // Restore vote
+
+        resetVoteButtons();
+
+
+        const savedVote =
+            localStorage.getItem(
+                "vote_" + currentQuestionId
+            );
+
+
+        if (savedVote) {
+
+            showSelectedVote(
+                savedVote
+            );
+
+        }
+
+
+        // Load results
+
+        loadResults();
+
+
+        // Load explanations
+
+        loadExplanations();
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+    }
+}
+
+
+
+// ============================================
+// BACK BUTTON
+// ============================================
+
+backButton.addEventListener(
+    "click",
+    function () {
+
+        questionSection.classList.add(
+            "hidden"
+        );
+
+
+        questionsSection.classList.remove(
+            "hidden"
+        );
+
+
+        currentQuestionId = null;
+
+
+        loadQuestions();
+
+    }
+);
 
 
 
@@ -255,7 +538,7 @@ noButton.addEventListener(
 
 
 // ============================================
-// VOTE FUNCTION
+// VOTE
 // ============================================
 
 async function vote(type) {
@@ -266,9 +549,7 @@ async function vote(type) {
     }
 
 
-    // ========================================
-    // CHECK IF USER ALREADY VOTED
-    // ========================================
+    // Check previous vote
 
     const savedVote =
         localStorage.getItem(
@@ -291,10 +572,6 @@ async function vote(type) {
                 currentQuestionId
             );
 
-
-        // ====================================
-        // UPDATE FIREBASE
-        // ====================================
 
         if (type === "yes") {
 
@@ -325,9 +602,7 @@ async function vote(type) {
         }
 
 
-        // ====================================
-        // SAVE VOTE IN BROWSER
-        // ====================================
+        // Save vote locally
 
         localStorage.setItem(
             "vote_" + currentQuestionId,
@@ -335,16 +610,12 @@ async function vote(type) {
         );
 
 
-        // ====================================
-        // SHOW SELECTED BUTTON
-        // ====================================
+        // Show selected button
 
         showSelectedVote(type);
 
 
-        // ====================================
-        // UPDATE RESULTS
-        // ====================================
+        // Update results
 
         await loadResults();
 
@@ -352,11 +623,7 @@ async function vote(type) {
     }
     catch (error) {
 
-        console.error(
-            "Vote error:",
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Could not submit vote."
@@ -415,7 +682,7 @@ function showSelectedVote(type) {
 
 
 // ============================================
-// RESET VOTE BUTTONS
+// RESET BUTTONS
 // ============================================
 
 function resetVoteButtons() {
@@ -488,10 +755,6 @@ async function loadResults() {
             yes + no;
 
 
-        // ====================================
-        // CALCULATE PERCENTAGES
-        // ====================================
-
         let yesPercentage = 0;
 
         let noPercentage = 0;
@@ -511,10 +774,6 @@ async function loadResults() {
         }
 
 
-        // ====================================
-        // UPDATE TEXT
-        // ====================================
-
         yesPercent.textContent =
             yesPercentage + "%";
 
@@ -527,10 +786,6 @@ async function loadResults() {
             total;
 
 
-        // ====================================
-        // UPDATE BARS
-        // ====================================
-
         yesBar.style.width =
             yesPercentage + "%";
 
@@ -538,14 +793,10 @@ async function loadResults() {
         noBar.style.width =
             noPercentage + "%";
 
-
     }
     catch (error) {
 
-        console.error(
-            "Load results error:",
-            error
-        );
+        console.error(error);
 
     }
 }
@@ -613,21 +864,15 @@ async function addExplanation() {
         );
 
 
-        // Clear input
         explanationInput.value = "";
 
 
-        // Reload explanations
         loadExplanations();
 
     }
     catch (error) {
 
-        console.error(
-            "Add explanation error:",
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Could not add explanation."
@@ -710,10 +955,7 @@ async function loadExplanations() {
     }
     catch (error) {
 
-        console.error(
-            "Load explanations error:",
-            error
-        );
+        console.error(error);
 
     }
 }
@@ -721,105 +963,26 @@ async function loadExplanations() {
 
 
 // ============================================
-// INITIAL LOAD
+// ESCAPE HTML
+// ============================================
+//
+// Protect question cards from HTML injection.
+//
 // ============================================
 
-async function initialLoad() {
+function escapeHTML(text) {
 
-    try {
-
-        const questionsRef =
-            collection(
-                db,
-                "questions"
-            );
-
-
-        const latestQuestion =
-            query(
-
-                questionsRef,
-
-                orderBy(
-                    "createdAt",
-                    "desc"
-                ),
-
-                limit(1)
-
-            );
-
-
-        const snapshot =
-            await getDocs(
-                latestQuestion
-            );
-
-
-        if (snapshot.empty) {
-
-            return;
-        }
-
-
-        const questionDoc =
-            snapshot.docs[0];
-
-
-        const data =
-            questionDoc.data();
-
-
-        // Save question ID
-        currentQuestionId =
-            questionDoc.id;
-
-
-        // Show question
-        questionText.textContent =
-            data.text;
-
-
-        questionSection.classList.remove(
-            "hidden"
+    const div =
+        document.createElement(
+            "div"
         );
 
 
-        // ====================================
-        // RESTORE USER'S VOTE
-        // ====================================
-
-        const savedVote =
-            localStorage.getItem(
-                "vote_" + currentQuestionId
-            );
+    div.textContent =
+        text;
 
 
-        if (savedVote) {
-
-            showSelectedVote(
-                savedVote
-            );
-
-        }
-
-
-        // Load results
-        loadResults();
-
-
-        // Load explanations
-        loadExplanations();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Initial load error:",
-            error
-        );
-
-    }
+    return div.innerHTML;
 }
 
 
@@ -828,4 +991,4 @@ async function initialLoad() {
 // START APP
 // ============================================
 
-initialLoad();
+loadQuestions();

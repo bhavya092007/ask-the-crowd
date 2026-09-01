@@ -4,22 +4,17 @@
 
 <head>
 
-    <!-- Basic page settings -->
     <meta charset="UTF-8">
 
-    <!-- Mobile responsive -->
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-    <!-- Page title -->
     <title>Ask The Crowd</title>
 
 
-    <!-- =====================================
-         GOOGLE FONT
-    ====================================== -->
+    <!-- Google Font -->
 
     <link
         rel="preconnect"
@@ -38,9 +33,7 @@
     >
 
 
-    <!-- =====================================
-         CSS
-    ====================================== -->
+    <!-- CSS -->
 
     <link
         rel="stylesheet"
@@ -53,10 +46,6 @@
 <body>
 
 
-    <!-- =====================================
-         MAIN CONTAINER
-    ====================================== -->
-
     <main class="container">
 
 
@@ -67,13 +56,12 @@
         <h1>Ask The Crowd</h1>
 
         <p>
-            Ask something.
-            Let the internet think.
+            Ask something. Let the crowd decide.
         </p>
 
 
         <!-- =================================
-             QUESTION INPUT
+             ASK QUESTION
         ================================== -->
 
         <div class="question-box">
@@ -81,7 +69,7 @@
             <input
                 type="text"
                 id="questionInput"
-                placeholder="Should I learn Java before DSA?"
+                placeholder="Ask the crowd something..."
                 maxlength="200"
             >
 
@@ -93,7 +81,35 @@
 
 
         <!-- =================================
-             QUESTION SECTION
+             ALL QUESTIONS
+        ================================== -->
+
+        <section class="questions-section">
+
+            <div class="section-header">
+
+                <h2>
+                    Questions
+                </h2>
+
+                <span id="questionCount">
+                    0
+                </span>
+
+            </div>
+
+
+            <div id="questionsList">
+
+                <!-- Questions will appear here -->
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             SINGLE QUESTION VIEW
         ================================== -->
 
         <section
@@ -102,18 +118,20 @@
         >
 
 
-            <!-- =============================
-                 QUESTION
-            ============================== -->
+            <button
+                id="backButton"
+                class="back-button"
+            >
+                ← Back to questions
+            </button>
+
 
             <h2 id="questionText">
-                Question goes here
+                Question
             </h2>
 
 
-            <!-- =============================
-                 VOTING
-            ============================== -->
+            <!-- YES / NO -->
 
             <div class="buttons">
 
@@ -128,14 +146,9 @@
             </div>
 
 
-            <!-- =============================
-                 CROWD RESULT
-            ============================== -->
+            <!-- CROWD RESULT -->
 
             <div class="crowd-result">
-
-
-                <!-- Result header -->
 
                 <div class="result-top">
 
@@ -156,9 +169,7 @@
                 </div>
 
 
-                <!-- =========================
-                     YES BAR
-                ========================== -->
+                <!-- YES -->
 
                 <div class="vote-row">
 
@@ -187,9 +198,7 @@
                 </div>
 
 
-                <!-- =========================
-                     NO BAR
-                ========================== -->
+                <!-- NO -->
 
                 <div class="vote-row">
 
@@ -221,19 +230,19 @@
 
 
             <!-- =================================
-                 EXPLANATIONS
+                 EXPLANATION
             ================================== -->
 
             <div class="explanation-section">
 
                 <h3>
-                    Why?
+                    What's your take?
                 </h3>
 
 
                 <textarea
                     id="explanationInput"
-                    placeholder="What's your reasoning?"
+                    placeholder="Tell the crowd why..."
                     maxlength="500"
                 ></textarea>
 
@@ -246,7 +255,7 @@
 
 
             <!-- =================================
-                 PEOPLE'S OPINIONS
+                 EXPLANATIONS
             ================================== -->
 
             <div class="opinions-section">
@@ -258,9 +267,6 @@
 
                 <div id="explanationList">
 
-                    <!-- Firebase explanations
-                         will appear here -->
-
                 </div>
 
             </div>
@@ -269,9 +275,7 @@
         </section>
 
 
-        <!-- =================================
-             FOOTER
-        ================================== -->
+        <!-- FOOTER -->
 
         <footer>
 
@@ -285,18 +289,16 @@
     </main>
 
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
-
     <!-- Firebase -->
+
     <script
         type="module"
         src="firebase.js"
     ></script>
 
 
-    <!-- Main JavaScript -->
+    <!-- Main JS -->
+
     <script
         type="module"
         src="script.js"

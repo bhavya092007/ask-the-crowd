@@ -15,7 +15,6 @@
 ===================================== */
 
 body {
-
     font-family: "Inter", sans-serif;
 
     background:
@@ -24,13 +23,11 @@ body {
             rgba(139, 92, 246, 0.18),
             transparent 30%
         ),
-
         radial-gradient(
             circle at 85% 80%,
             rgba(34, 211, 238, 0.12),
             transparent 30%
         ),
-
         #09090b;
 
     color: #f5f5f5;
@@ -44,9 +41,7 @@ body {
 ===================================== */
 
 .container {
-
     width: 90%;
-
     max-width: 680px;
 
     margin: auto;
@@ -60,7 +55,6 @@ body {
 ===================================== */
 
 h1 {
-
     font-size: clamp(42px, 8vw, 70px);
 
     font-weight: 800;
@@ -79,13 +73,11 @@ h1 {
     );
 
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
 }
 
 
 .container > p {
-
     color: #888;
 
     font-size: 15px;
@@ -99,7 +91,6 @@ h1 {
 ===================================== */
 
 .question-box {
-
     margin-top: 35px;
 
     padding: 9px;
@@ -141,7 +132,6 @@ h1 {
 ===================================== */
 
 input {
-
     flex: 1;
 
     min-width: 0;
@@ -163,13 +153,11 @@ input {
 
 
 input::placeholder {
-
     color: #666;
 }
 
 
 input:focus {
-
     background: rgba(
         255,
         255,
@@ -184,7 +172,6 @@ input:focus {
 ===================================== */
 
 button {
-
     padding: 13px 20px;
 
     border: none;
@@ -209,7 +196,6 @@ button {
 
 
 button:hover {
-
     transform: translateY(-2px);
 
     box-shadow:
@@ -223,9 +209,205 @@ button:hover {
 
 
 button:active {
-
     transform: translateY(0);
+}
 
+
+/* =====================================
+   QUESTIONS SECTION
+===================================== */
+
+.questions-section {
+    margin-top: 45px;
+}
+
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.section-header h2 {
+    font-size: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.5px;
+
+    color: #888;
+}
+
+
+#questionCount {
+    font-size: 11px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    color: #888;
+}
+
+
+/* =====================================
+   QUESTION CARD
+===================================== */
+
+.question-card {
+    padding: 20px;
+
+    margin-bottom: 12px;
+
+    border-radius: 16px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.045
+    );
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border 0.2s ease;
+}
+
+
+.question-card:hover {
+    transform: translateY(-3px);
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.07
+    );
+
+    border-color: rgba(
+        167,
+        139,
+        250,
+        0.3
+    );
+}
+
+
+/* =====================================
+   CARD QUESTION
+===================================== */
+
+.card-question {
+    font-size: 17px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    margin-bottom: 16px;
+
+    color: #f5f5f5;
+}
+
+
+/* =====================================
+   CARD RESULT
+===================================== */
+
+.card-result {
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 11px;
+
+    color: #888;
+
+    margin-bottom: 7px;
+}
+
+
+.card-result span:first-child {
+    color: #a78bfa;
+
+    font-weight: 700;
+}
+
+
+/* =====================================
+   MINI BAR
+===================================== */
+
+.mini-bar {
+    height: 6px;
+
+    width: 100%;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.07
+    );
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.mini-bar-fill {
+    height: 100%;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #a78bfa,
+        #67e8f9
+    );
+
+    transition:
+        width 0.5s ease;
+}
+
+
+/* =====================================
+   CARD FOOTER
+===================================== */
+
+.card-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    font-size: 10px;
+
+    color: #666;
 }
 
 
@@ -234,7 +416,6 @@ button:active {
 ===================================== */
 
 #questionSection {
-
     margin-top: 25px;
 
     padding: 30px;
@@ -272,7 +453,6 @@ button:active {
 ===================================== */
 
 #questionText {
-
     font-size: clamp(
         25px,
         5vw,
@@ -292,7 +472,6 @@ button:active {
 ===================================== */
 
 .buttons {
-
     display: grid;
 
     grid-template-columns:
@@ -303,7 +482,6 @@ button:active {
 
 
 .buttons button {
-
     padding: 17px;
 
     background: rgba(
@@ -327,10 +505,36 @@ button:active {
 
 
 .buttons button:hover {
-
     background: white;
 
     color: #09090b;
+}
+
+
+/* =====================================
+   SELECTED VOTE
+===================================== */
+
+.buttons button.selected {
+    background: linear-gradient(
+        90deg,
+        #a78bfa,
+        #67e8f9
+    );
+
+    color: #09090b;
+
+    border-color: transparent;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 30px rgba(
+            103,
+            232,
+            249,
+            0.15
+        );
 }
 
 
@@ -339,7 +543,6 @@ button:active {
 ===================================== */
 
 .crowd-result {
-
     margin: 30px 0;
 
     padding: 20px;
@@ -367,7 +570,6 @@ button:active {
 ===================================== */
 
 .result-top {
-
     display: flex;
 
     justify-content: space-between;
@@ -385,7 +587,6 @@ button:active {
 
 
 .result-top b {
-
     color: white;
 
     font-size: 13px;
@@ -399,13 +600,11 @@ button:active {
 ===================================== */
 
 .vote-row {
-
     margin-top: 18px;
 }
 
 
 .vote-info {
-
     display: flex;
 
     justify-content: space-between;
@@ -417,7 +616,6 @@ button:active {
 
 
 .vote-info span {
-
     font-size: 12px;
 
     font-weight: 700;
@@ -429,7 +627,6 @@ button:active {
 
 
 .vote-info strong {
-
     font-size: 14px;
 
     color: white;
@@ -441,7 +638,6 @@ button:active {
 ===================================== */
 
 .vote-track {
-
     width: 100%;
 
     height: 9px;
@@ -464,7 +660,6 @@ button:active {
 ===================================== */
 
 .vote-fill {
-
     height: 100%;
 
     width: 0%;
@@ -485,7 +680,6 @@ button:active {
 /* YES BAR */
 
 .yes-fill {
-
     background: linear-gradient(
         90deg,
         #a78bfa,
@@ -497,7 +691,6 @@ button:active {
 /* NO BAR */
 
 .no-fill {
-
     background: #555;
 }
 
@@ -507,7 +700,6 @@ button:active {
 ===================================== */
 
 h3 {
-
     margin-top: 28px;
 
     margin-bottom: 12px;
@@ -527,7 +719,6 @@ h3 {
 ===================================== */
 
 textarea {
-
     width: 100%;
 
     height: 110px;
@@ -568,13 +759,11 @@ textarea {
 
 
 textarea::placeholder {
-
     color: #666;
 }
 
 
 textarea:focus {
-
     border-color:
         rgba(
             167,
@@ -590,7 +779,6 @@ textarea:focus {
 ===================================== */
 
 #explanationButton {
-
     width: 100%;
 
     margin-top: 5px;
@@ -602,7 +790,6 @@ textarea:focus {
 ===================================== */
 
 #explanationList {
-
     margin-top: 15px;
 
     text-align: left;
@@ -614,7 +801,6 @@ textarea:focus {
 ===================================== */
 
 .explanation {
-
     background: rgba(
         255,
         255,
@@ -646,7 +832,6 @@ textarea:focus {
 
 
 .explanation:hover {
-
     transform:
         translateX(4px);
 
@@ -660,11 +845,64 @@ textarea:focus {
 
 
 /* =====================================
+   BACK BUTTON
+===================================== */
+
+.back-button {
+    background: transparent;
+
+    color: #777;
+
+    padding: 0;
+
+    margin-bottom: 25px;
+
+    font-size: 12px;
+
+    box-shadow: none;
+}
+
+
+.back-button:hover {
+    color: white;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    transform: none;
+}
+
+
+/* =====================================
+   EMPTY STATE
+===================================== */
+
+.empty-state {
+    text-align: center;
+
+    padding: 40px 20px;
+
+    border-radius: 15px;
+
+    border: 1px dashed rgba(
+        255,
+        255,
+        255,
+        0.1
+    );
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+
+/* =====================================
    FOOTER
 ===================================== */
 
 footer {
-
     text-align: center;
 
     margin-top: 45px;
@@ -680,7 +918,6 @@ footer {
 ===================================== */
 
 .hidden {
-
     display: none;
 }
 
@@ -692,7 +929,6 @@ footer {
 @media (max-width: 600px) {
 
     .container {
-
         width: 92%;
 
         padding: 45px 0;
@@ -700,13 +936,11 @@ footer {
 
 
     h1 {
-
         letter-spacing: -2px;
     }
 
 
     .question-box {
-
         flex-direction: column;
 
         padding: 10px;
@@ -714,66 +948,43 @@ footer {
 
 
     .question-box button {
-
         width: 100%;
     }
 
 
     #questionSection {
-
         padding: 22px;
     }
 
 
     #questionText {
-
         font-size: 26px;
     }
 
 
     .buttons {
-
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
 
     .crowd-result {
-
         padding: 16px;
     }
 
 
     .result-top {
-
         font-size: 9px;
     }
 
-}
+
+    .question-card {
+        padding: 16px;
+    }
 
 
-/* =====================================
-   SELECTED VOTE
-===================================== */
+    .card-question {
+        font-size: 15px;
+    }
 
-.buttons button.selected {
-
-    background: linear-gradient(
-        90deg,
-        #a78bfa,
-        #67e8f9
-    );
-
-    color: #09090b;
-
-    border-color: transparent;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 30px rgba(
-            103,
-            232,
-            249,
-            0.15
-        );
 }
