@@ -12,6 +12,56 @@
 import { db } from "./firebase.js";
 
 
+// ============================================
+// AUTH GUARD + LOGOUT
+// ============================================
+
+import { auth } from "./firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+// Guard: redirect to login if not authenticated
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+        window.location.replace("auth.html");
+
+    } else {
+
+        // Show user's display name if available
+        const greeting = document.getElementById("userGreeting");
+        if (greeting && user.email) {
+            greeting.textContent = user.email;
+        }
+
+    }
+
+});
+
+
+// Logout button
+document.getElementById("logoutBtn")?.addEventListener("click", async () => {
+
+    try {
+
+        await signOut(auth);
+        window.location.replace("auth.html");
+
+    } catch (error) {
+
+        console.error("Logout error:", error);
+
+    }
+
+});
+
+
 import {
 
     collection,

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ask The Crowd — Sign In</title>
+
+
+    <!-- Google Font -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="auth.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         LOADING SCREEN
+    ========================================== -->
+
+    <div id="authLoading" class="auth-loading">
+
+        <div class="auth-loading-spinner"></div>
+
+    </div>
+
+
+    <!-- =========================================
+         AUTH WRAPPER
+    ========================================== -->
+
+    <div id="authWrapper" class="auth-wrapper hidden">
+
+
+        <!-- =====================================
+             LEFT PANEL (Branding)
+        ====================================== -->
+
+        <div class="auth-brand-panel">
+
+            <div class="auth-brand-inner">
+
+                <h1>Ask The<br>Crowd</h1>
+
+                <p class="auth-brand-tagline">
+                    Ask something.<br>
+                    Let the crowd decide.
+                </p>
+
+                <div class="auth-brand-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             RIGHT PANEL (Forms)
+        ====================================== -->
+
+        <div class="auth-form-panel">
+
+            <div class="auth-form-container">
+
+
+                <!-- =============================
+                     TABS
+                ============================== -->
+
+                <div class="auth-tabs">
+
+                    <button
+                        id="tabLogin"
+                        class="auth-tab active"
+                    >
+                        Log In
+                    </button>
+
+                    <button
+                        id="tabSignup"
+                        class="auth-tab"
+                    >
+                        Sign Up
+                    </button>
+
+                </div>
+
+
+                <!-- =============================
+                     ERROR / SUCCESS MESSAGE
+                ============================== -->
+
+                <div id="authMessage" class="auth-message hidden"></div>
+
+
+                <!-- =============================
+                     LOGIN FORM
+                ============================== -->
+
+                <form id="loginForm" class="auth-form">
+
+                    <div class="auth-field">
+
+                        <label for="loginEmail">Email</label>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="auth-field">
+
+                        <label for="loginPassword">Password</label>
+
+                        <div class="auth-input-wrap">
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="auth-eye"
+                                data-target="loginPassword"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="auth-forgot-row">
+
+                        <button
+                            type="button"
+                            id="forgotPasswordBtn"
+                            class="auth-link-btn"
+                        >
+                            Forgot password?
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="loginSubmit"
+                        class="auth-submit"
+                    >
+                        Log In
+                    </button>
+
+                </form>
+
+
+                <!-- =============================
+                     SIGNUP FORM
+                ============================== -->
+
+                <form id="signupForm" class="auth-form hidden">
+
+                    <div class="auth-field">
+
+                        <label for="signupName">Full Name</label>
+
+                        <input
+                            type="text"
+                            id="signupName"
+                            placeholder="Your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="auth-field">
+
+                        <label for="signupEmail">Email</label>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="auth-field">
+
+                        <label for="signupPassword">Password</label>
+
+                        <div class="auth-input-wrap">
+
+                            <input
+                                type="password"
+                                id="signupPassword"
+                                placeholder="At least 6 characters"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="auth-eye"
+                                data-target="signupPassword"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="auth-field">
+
+                        <label for="signupConfirm">Confirm Password</label>
+
+                        <div class="auth-input-wrap">
+
+                            <input
+                                type="password"
+                                id="signupConfirm"
+                                placeholder="Repeat your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="auth-eye"
+                                data-target="signupConfirm"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="signupSubmit"
+                        class="auth-submit"
+                    >
+                        Create Account
+                    </button>
+
+                </form>
+
+
+                <!-- =============================
+                     FORGOT PASSWORD FORM
+                ============================== -->
+
+                <form id="forgotForm" class="auth-form hidden">
+
+                    <div class="auth-forgot-heading">
+
+                        <button
+                            type="button"
+                            id="forgotBack"
+                            class="auth-back-btn"
+                        >
+                            ← Back
+                        </button>
+
+                        <h2>Reset Password</h2>
+
+                        <p>
+                            Enter your email and we'll send you a
+                            reset link.
+                        </p>
+
+                    </div>
+
+                    <div class="auth-field">
+
+                        <label for="forgotEmail">Email</label>
+
+                        <input
+                            type="email"
+                            id="forgotEmail"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="forgotSubmit"
+                        class="auth-submit"
+                    >
+                        Send Reset Link
+                    </button>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Auth JS -->
+
+    <script
+        type="module"
+        src="auth.js"
+    ></script>
+
+
+</body>
+
+</html>
+

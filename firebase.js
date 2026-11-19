@@ -20,6 +20,14 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
+// Import Firebase Auth
+import {
+    getAuth
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
 
 // ============================================
 // FIREBASE CONFIG
@@ -67,13 +75,22 @@ const db =
 
 
 // ============================================
-// EXPORT DATABASE
+// INITIALIZE AUTH
+// ============================================
+
+const auth =
+    getAuth(app);
+
+
+
+// ============================================
+// EXPORT DATABASE AND AUTH
 // ============================================
 //
 // script.js will import this:
 //
-// import { db } from "./firebase.js";
+// import { db, auth } from "./firebase.js";
 //
 // ============================================
 
-export { db };
+export { db, auth };
